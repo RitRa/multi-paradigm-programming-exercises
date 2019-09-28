@@ -1,4 +1,4 @@
-# multi-paradigm-programming-exercises
+# Multi-paradigm programming exercises
 
 **Week 3 exercises**
  - Imperative 
