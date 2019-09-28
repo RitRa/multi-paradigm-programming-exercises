@@ -8,4 +8,4 @@ result = sumUp(1,2)
 print("Result is", result)
 
 result = sumUp(3,3)  
-print("Result is", result) s
+print("Result is", result) 
