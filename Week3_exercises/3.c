@@ -16,3 +16,6 @@ int main()
 
     return 0;
 }
+
+
+ ⁨Users⁩/⁨ritaraher/Dropbox⁩/SWO-prototype⁩/⁨05_code⁩/scrapping
