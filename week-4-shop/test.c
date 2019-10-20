@@ -121,14 +121,11 @@ struct Customer orderAndshop(){
 
             customer.name = name;
 			customer.budget = budget;
-			//customer = name;
-			//customer = {budget};
-			
 
 			struct Product product = {p};
 			struct ProductStock orderItem = {product, quantity};
 			customer.shoppingList[customer.index++]=orderItem;
-            //printf("Rita test, NAME: %s \nBUDGET: %.2f product %s quantity %d \n", customer.name, customer.budget, product.name, orderItem.quantity);
+            printf("Rita test, NAME: %s \nBUDGET: %.2f product %s quantity %d \n", customer.name, customer.budget, product.name, orderItem.quantity);
         }
 
     return customer;
@@ -137,29 +134,23 @@ struct Customer orderAndshop(){
 void printCustomer(struct Customer c)
 {
 	printf("-------------\n");
-	//printf("test: %c \n", c.name[c.index++]);
-	printf("CUSTOMER NAME: %s \n", c.name);
-
 
 	for(int z = 0; z < c.index; z++)
 	{
-		//printf("test: %c \n", c.name[c.index]);
+        for(int i = 0; i < c.index; z++)
+    	{
 
-	    //printf("z %d\n", c.name[z]);
-		//printf("c %d\n", c.index);
-		//printf("z %d\n", z);
-		//printf("index %d\n", c.index);
-		//printf("index %d\n", customer[z].name);
-		
-		printf("CUSTOMER NAME: %s \n", c.name);
-		
+		printf("z %d\n", z);
+        printf("i %d\n", i);
+		printf("CUSTOMER NAME: %s \n", c[i].name);
 
-		//printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", c.name, c.budget);
-		//printProduct(c.shoppingList[z].product);
-		//printf("%s ORDERS %d OF ABOVE PRODUCT %s \n", c.name, c.shoppingList[z].quantity, c.shoppingList[z].product.name);
-		//double cost = c.shoppingList[z].quantity * c.shoppingList[z].product.price;
-		//printf("Price %f\n", c.shoppingList[z].product.price);
-		// printf("The cost to %s will be €%.2f\n", c.name, cost);
+		printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", c.name, c.budget);
+		printProduct(c.shoppingList[z].product);
+		printf("%s ORDERS %d OF ABOVE PRODUCT %s \n", c.name, c.shoppingList[z].quantity, c.shoppingList[z].product.name);
+		double cost = c.shoppingList[z].quantity * c.shoppingList[z].product.price;
+		printf("Price %f\n", c.shoppingList[z].product.price);
+		printf("The cost to %s will be €%.2f\n", c.name, cost);
+    }
 
 	}
 }

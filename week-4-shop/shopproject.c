@@ -32,10 +32,9 @@ void printProduct(struct Product p)
 }
 
 
-
 struct Shop createAndStockShop()
 {
-	struct Shop shop = { 200 };
+	
     FILE * fp;
     char * line = NULL;
     size_t len = 0;
@@ -46,35 +45,25 @@ struct Shop createAndStockShop()
     if (fp == NULL)
         exit(EXIT_FAILURE);
 
+	getline(&line, &len, fp);
+	// read cash in 
+	double cashInshop = atof(line);
+	struct Shop shop = { cashInshop };
+
 
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
-	    i++;
-	        // reading in the first line of the csv
-	    if(i == 1 )
-	    {
-	            char *n = strtok(line, ",");
-	            // grabbing the cash amount
-	            char *c = strtok(NULL, ",");
-	            double cashn = atoi(c);
-	            //assigning it to the shop
-	            shop.cash = cashn;
-
-	    }
-	    else
-		{
             char *n = strtok(line, ",");
             char *p = strtok(NULL, ",");
             char *q = strtok(NULL, ",");
             // convert to datatypes
-            double price = atoi(p);
+            double price = atof(p);
             int quantity = atoi(q);
             char *name = malloc(sizeof(char)*50);
             strcpy(name, n);
             struct Product product = {name, price};
             struct ProductStock stockItem = {product, quantity};
             shop.stock[shop.index++]=stockItem;
-        }
     }
 
 	return shop;
@@ -113,22 +102,21 @@ struct Customer orderAndshop(){
             char *b = strtok(NULL, ",");
             char *p = strtok(NULL, ",");
 			char *q = strtok(NULL, ",");
-
-            double budget = atoi(b);
+           
 			int quantity = atoi(q);
             char *name = malloc(sizeof(char)*50);
             strcpy(name, n);
-
-            customer.name = name;
+            //customer.name = name;
+			//customer.budget = budget;
+			customer.name = name ;
+			double budget = atoi(b);
 			customer.budget = budget;
-			//customer = name;
-			//customer = {budget};
 			
-
+			//struct Customer customer= { name, budget };
 			struct Product product = {p};
 			struct ProductStock orderItem = {product, quantity};
 			customer.shoppingList[customer.index++]=orderItem;
-            //printf("Rita test, NAME: %s \nBUDGET: %.2f product %s quantity %d \n", customer.name, customer.budget, product.name, orderItem.quantity);
+            //printf("Name: %s,  budget %f, product %s, quantity %d \n", customer.name, customer.budget, product.name, orderItem.quantity);
         }
 
     return customer;
@@ -138,30 +126,27 @@ void printCustomer(struct Customer c)
 {
 	printf("-------------\n");
 	//printf("test: %c \n", c.name[c.index++]);
-	printf("CUSTOMER NAME: %s \n", c.name);
+	//printf("CUSTOMER NAME: %s \n", c.name);
 
-
-	for(int z = 0; z < c.index; z++)
+	for (int z = 0; z < c.index; z++)
 	{
-		//printf("test: %c \n", c.name[c.index]);
-
-	    //printf("z %d\n", c.name[z]);
-		//printf("c %d\n", c.index);
-		//printf("z %d\n", z);
-		//printf("index %d\n", c.index);
-		//printf("index %d\n", customer[z].name);
-		
-		printf("CUSTOMER NAME: %s \n", c.name);
-		
-
-		//printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", c.name, c.budget);
-		//printProduct(c.shoppingList[z].product);
-		//printf("%s ORDERS %d OF ABOVE PRODUCT %s \n", c.name, c.shoppingList[z].quantity, c.shoppingList[z].product.name);
+		printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", c.name, c.budget);
+		printProduct(c.shoppingList[z].product);
+		printf("%s ORDERS %d OF ABOVE PRODUCT %s \n", c.name, c.shoppingList[z].quantity, c.shoppingList[z].product.name);
+		printf("The shop has %d of the above\n", s.stock[i].quantity);
 		//double cost = c.shoppingList[z].quantity * c.shoppingList[z].product.price;
 		//printf("Price %f\n", c.shoppingList[z].product.price);
 		// printf("The cost to %s will be €%.2f\n", c.name, cost);
-
 	}
+
+
+
+
+		
+
+		
+
+	
 }
 
 int main(void)
@@ -171,7 +156,10 @@ int main(void)
 	printShop(shop);
 
 	struct Customer customer = orderAndshop();
+
     printCustomer(customer);
+	//printf("Name: %s,  budget %f,  \n", Customer.customer.name, customer.budget);
+       
 
     return 0;
 }

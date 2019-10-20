@@ -93,6 +93,8 @@ void printShop(struct Shop s)
 
 }
 
+
+
 int main(void)
 {
     struct Customer dominic = {"Dominic", 100};
