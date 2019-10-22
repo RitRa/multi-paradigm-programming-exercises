@@ -31,6 +31,12 @@ void printProduct(struct Product p)
 	printf("-------------\n");
 }
 
+void printOrders(struct Product product)
+{
+	printf("PRODUCT NAME: %s", product.name);
+	printf("-------------\n");
+}
+
 
 struct Shop createAndStockShop()
 {
@@ -61,6 +67,8 @@ struct Shop createAndStockShop()
             int quantity = atoi(q);
             char *name = malloc(sizeof(char)*50);
             strcpy(name, n);
+
+			
             struct Product product = {name, price};
             struct ProductStock stockItem = {product, quantity};
             shop.stock[shop.index++]=stockItem;
@@ -82,7 +90,7 @@ void printShop(struct Shop s)
 
 // reading in customers from csv
 struct Customer orderAndshop(){
-	struct Customer customer;
+	
 	FILE * fp;
 	char * line = NULL;
 	size_t len = 0;
@@ -95,56 +103,49 @@ struct Customer orderAndshop(){
 	if (fp == NULL)
 		exit(EXIT_FAILURE);
 
+	getline(&line, &len, fp);
+	// read customer name and budget
+	char *n = strtok(line, ",");
+    char *b = strtok(NULL, ",");
+	
+	char *name = malloc(sizeof(char)*50);
+    strcpy(name, n);
+	double budget = atoi(b);
+	struct Customer current ={ name, budget };
+	//struct Shop shop = { cashInshop };
+	//printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", current.name, current.budget);
+	
     while ((read = getline(&line, &len, fp)) != -1)
     {
-
-            char *n = strtok(line, ",");
-            char *b = strtok(NULL, ",");
-            char *p = strtok(NULL, ",");
+		   
+            char *p = strtok(line, ",");
 			char *q = strtok(NULL, ",");
-           
 			int quantity = atoi(q);
-            char *name = malloc(sizeof(char)*50);
-            strcpy(name, n);
-            //customer.name = name;
-			//customer.budget = budget;
-			customer.name = name ;
-			double budget = atoi(b);
-			customer.budget = budget;
-			
-			//struct Customer customer= { name, budget };
-			struct Product product = {p};
+			char *productname = malloc(sizeof(char)*50);
+			strcpy(productname, p);
+			struct Product product = {productname};
 			struct ProductStock orderItem = {product, quantity};
-			customer.shoppingList[customer.index++]=orderItem;
-            //printf("Name: %s,  budget %f, product %s, quantity %d \n", customer.name, customer.budget, product.name, orderItem.quantity);
+			current.shoppingList[current.index++]=orderItem;
+			//printf("Product: %s \nQuantity: %d\n", orderItem.product.name, orderItem.quantity);
+		
         }
 
-    return customer;
+    return current;
 }
 
-void printCustomer(struct Customer c)
+void printCustomer(struct Customer current)
 {
-	printf("-------------\n");
-	//printf("test: %c \n", c.name[c.index++]);
-	//printf("CUSTOMER NAME: %s \n", c.name);
+	printf("\n#######\n");
 
-	for (int z = 0; z < c.index; z++)
+	
+	printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", current.name, current.budget);
+
+	for (int i = 0; i < current.index; i++)
 	{
-		printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", c.name, c.budget);
-		printProduct(c.shoppingList[z].product);
-		printf("%s ORDERS %d OF ABOVE PRODUCT %s \n", c.name, c.shoppingList[z].quantity, c.shoppingList[z].product.name);
-		printf("The shop has %d of the above\n", s.stock[i].quantity);
-		//double cost = c.shoppingList[z].quantity * c.shoppingList[z].product.price;
-		//printf("Price %f\n", c.shoppingList[z].product.price);
-		// printf("The cost to %s will be €%.2f\n", c.name, cost);
+		printProduct(current.shoppingList[i].product);
+		printf("The quantity of the above: %d\n", current.shoppingList[i].quantity);
+		printf("-------------\n");
 	}
-
-
-
-
-		
-
-		
 
 	
 }
@@ -155,11 +156,12 @@ int main(void)
 	struct Shop shop = createAndStockShop();
 	printShop(shop);
 
-	struct Customer customer = orderAndshop();
+	struct Customer current = orderAndshop();
+	//printf("Name: %s,  budget %f,  \n", current.name, current.budget);
+    //printf("Product: %s \nQuantity:\n", current.ProductStock.product);
+			   
+    printCustomer(current);
 
-    printCustomer(customer);
-	//printf("Name: %s,  budget %f,  \n", Customer.customer.name, customer.budget);
-       
 
     return 0;
 }
