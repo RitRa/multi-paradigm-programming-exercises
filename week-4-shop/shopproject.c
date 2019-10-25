@@ -31,13 +31,6 @@ void printProduct(struct Product p)
 	printf("-------------\n");
 }
 
-void printOrders(struct Product product)
-{
-	printf("PRODUCT NAME: %s", product.name);
-	printf("-------------\n");
-}
-
-
 struct Shop createAndStockShop()
 {
 	
@@ -83,6 +76,7 @@ void printShop(struct Shop s)
 	printf("Shop has %.2f in cash\n", s.cash);
 	for (int i = 0; i < s.index; i++)
 	{
+		
 		printProduct(s.stock[i].product);
 		printf("The shop has %d of the above\n", s.stock[i].quantity);
 	}
@@ -96,7 +90,6 @@ struct Customer orderAndshop(){
 	size_t len = 0;
 	ssize_t read;
 	int i = 0;
-
 
 	fp = fopen("orders.csv", "r");
 	// if file doesn't exist exit program
@@ -137,17 +130,68 @@ void printCustomer(struct Customer current)
 {
 	printf("\n#######\n");
 
-	
 	printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", current.name, current.budget);
 
 	for (int i = 0; i < current.index; i++)
 	{
 		printProduct(current.shoppingList[i].product);
 		printf("The quantity of the above: %d\n", current.shoppingList[i].quantity);
+		//struct Shop s;
+		//struct Product product = s.stock[i].product;
+		
+		//printProduct(product);
 		printf("-------------\n");
 	}
 
-	
+}
+
+
+
+// searching for price
+double findProductPrice(struct Shop s, struct Customer current)
+{
+	for (int i = 0; i < s.index; i++)
+	{
+		for (int j = 0; j < current.index; j++)
+		{
+			struct Product product = s.stock[i].product;
+			//printf("------------- %s", product.name);
+			struct Product productcustomer = current.shoppingList[i].product;
+			printf("------------- %s", productcustomer.name);
+
+			char *products = product.name;
+			char *productc = productcustomer.name;
+
+			if (strcmp(products, productc) ==0)
+			{
+					printf("Hello world");
+			}
+			//current.shoppingList[i].product
+			//char *name = product.name;
+			//return name;
+			// if they are equal it will return a zero
+			//if (strcmp(name, n) ==0)
+			//{
+			//	return product.price;
+			//}
+		}
+	}
+	return -1;
+}
+
+double findProductPrice2(struct Shop s, char *n)
+{
+	for (int i = 0; i < s.index; i++)
+	{
+		struct Product product = s.stock[i].product;
+		char *name = product.name;
+		// if they are equal it will return a zero
+		if (strcmp(name, n) ==0)
+		{
+			return product.price;
+		}
+	}
+	return -1;
 }
 
 int main(void)
@@ -157,10 +201,16 @@ int main(void)
 	printShop(shop);
 
 	struct Customer current = orderAndshop();
-	//printf("Name: %s,  budget %f,  \n", current.name, current.budget);
-    //printf("Product: %s \nQuantity:\n", current.ProductStock.product);
-			   
+	//printf("Name: %s,  budget %f,  \n", current.name, current.budget);		   
     printCustomer(current);
+
+	// searching for price
+	double price = findProductPrice2(shop, "Coke can");
+	printf("%.2f\n", price);
+
+	//char nameproduct = 
+	findProductPrice(shop, current);
+	//printf("%c\n", nameproduct);
 
 
     return 0;
