@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+// how to run gcc -g -o shopproject.o shopproject.c
+// ./shopproject.o
 struct Product {
 	char* name;
 	double price;
@@ -139,14 +140,16 @@ void printCustomer(struct Customer current)
 		
 		printf("-------------\n");
 	}
+	//struct Shop shop;
+	//double price = findProductPrice(struct Shop s, current);
+	//double price = price;
+	//printf("%.2d\n", price);
 	//double price = findProductPrice(s, current);
 	//printf("customer prices: %.2f\n", price);
 	//struct Product product;
 	//printf("customer prices: %.2f\n", product.price);
 	
 }
-
-
 
 // searching both and comparing and returning price
 double findProductPrice(struct Shop s, struct Customer current)
@@ -181,12 +184,17 @@ int main(void)
 	printShop(shop);
 
 	struct Customer current = orderAndshop();
-	//printf("Name: %s,  budget %f,  \n", current.name, current.budget);		   
+	//printf("Name: %s,  budget %f,  \n", current.name, current.budget);	
+	// searching for price
+		
+
     printCustomer(current);
 
-	// searching for price
 	double price = findProductPrice(shop, current);
 	printf("%.2f\n", price);
+
+	//double bill = price *
+
 
     return 0;
 }
