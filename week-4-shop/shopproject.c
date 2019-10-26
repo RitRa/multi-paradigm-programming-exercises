@@ -126,30 +126,32 @@ struct Customer orderAndshop(){
     return current;
 }
 
+// customer details and order
 void printCustomer(struct Customer current)
 {
 	printf("\n#######\n");
-
 	printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", current.name, current.budget);
 
 	for (int i = 0; i < current.index; i++)
 	{
 		printProduct(current.shoppingList[i].product);
 		printf("The quantity of the above: %d\n", current.shoppingList[i].quantity);
-		//struct Shop s;
-		//struct Product product = s.stock[i].product;
 		
-		//printProduct(product);
 		printf("-------------\n");
 	}
-
+	//double price = findProductPrice(s, current);
+	//printf("customer prices: %.2f\n", price);
+	//struct Product product;
+	//printf("customer prices: %.2f\n", product.price);
+	
 }
 
 
 
-// searching for price
+// searching both and comparing and returning price
 double findProductPrice(struct Shop s, struct Customer current)
 {
+	struct Product productcustomer;
 	// loop through shop 
 	for (int i = 0; i < s.index; i++)
 	{
@@ -158,27 +160,23 @@ double findProductPrice(struct Shop s, struct Customer current)
 		{
 			struct Product product = s.stock[i].product;
 			struct Product productcustomer = current.shoppingList[j].product;
-
 			// compare shop and order
 			if (strcmp(product.name, productcustomer.name) ==0)
 			{
 					//printf("%s, %.2f\n", product.name, product.price );
-					printf("%.2f\n", product.price );
-					//return current;
-					
+					//printf("%.2f\n", product.price );
+					//double price = product.price;
+					printf("%.2f\n", product.price);
+					//return product.price;	
 			}
 		}
 	}
-	
-	
-	return -1;
+	return -1; 
 }
-
 
 
 int main(void)
 {
-
 	struct Shop shop = createAndStockShop();
 	printShop(shop);
 
@@ -189,7 +187,6 @@ int main(void)
 	// searching for price
 	double price = findProductPrice(shop, current);
 	printf("%.2f\n", price);
-
 
     return 0;
 }
