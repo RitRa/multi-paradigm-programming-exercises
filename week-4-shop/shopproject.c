@@ -150,49 +150,31 @@ void printCustomer(struct Customer current)
 // searching for price
 double findProductPrice(struct Shop s, struct Customer current)
 {
+	// loop through shop 
 	for (int i = 0; i < s.index; i++)
 	{
+		// loop through customer order
 		for (int j = 0; j < current.index; j++)
 		{
 			struct Product product = s.stock[i].product;
-			//printf("------------- %s", product.name);
-			struct Product productcustomer = current.shoppingList[i].product;
-			printf("------------- %s", productcustomer.name);
+			struct Product productcustomer = current.shoppingList[j].product;
 
-			char *products = product.name;
-			char *productc = productcustomer.name;
-
-			if (strcmp(products, productc) ==0)
+			// compare shop and order
+			if (strcmp(product.name, productcustomer.name) ==0)
 			{
-					printf("Hello world");
+					//printf("%s, %.2f\n", product.name, product.price );
+					printf("%.2f\n", product.price );
+					//return current;
+					
 			}
-			//current.shoppingList[i].product
-			//char *name = product.name;
-			//return name;
-			// if they are equal it will return a zero
-			//if (strcmp(name, n) ==0)
-			//{
-			//	return product.price;
-			//}
 		}
 	}
+	
+	
 	return -1;
 }
 
-double findProductPrice2(struct Shop s, char *n)
-{
-	for (int i = 0; i < s.index; i++)
-	{
-		struct Product product = s.stock[i].product;
-		char *name = product.name;
-		// if they are equal it will return a zero
-		if (strcmp(name, n) ==0)
-		{
-			return product.price;
-		}
-	}
-	return -1;
-}
+
 
 int main(void)
 {
@@ -205,12 +187,8 @@ int main(void)
     printCustomer(current);
 
 	// searching for price
-	double price = findProductPrice2(shop, "Coke can");
+	double price = findProductPrice(shop, current);
 	printf("%.2f\n", price);
-
-	//char nameproduct = 
-	findProductPrice(shop, current);
-	//printf("%c\n", nameproduct);
 
 
     return 0;
