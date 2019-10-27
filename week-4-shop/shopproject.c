@@ -170,8 +170,11 @@ double findProductPrice(struct Shop s, struct Customer current)
 					//printf("%.2f\n", product.price );
 					//double price = product.price;
 					printf("%.2f\n", product.price);
+					//return product.price;
+					//productcustomer.price = product.price;
 					//return product.price;	
 			}
+			//printf("%.2f\n", productcustomer.price);
 		}
 	}
 	return -1; 
@@ -186,14 +189,11 @@ int main(void)
 	struct Customer current = orderAndshop();
 	//printf("Name: %s,  budget %f,  \n", current.name, current.budget);	
 	// searching for price
-		
 
     printCustomer(current);
 
 	double price = findProductPrice(shop, current);
 	printf("%.2f\n", price);
-
-	//double bill = price *
 
 
     return 0;
