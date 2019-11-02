@@ -1,4 +1,4 @@
-package JavaShop;
+package ShopVideoVersion;
 
 public class Product {
 	private String name;
