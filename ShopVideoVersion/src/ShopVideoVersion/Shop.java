@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;  // Import the Scanner class
 
 public class Shop {
 
@@ -33,6 +34,7 @@ public class Shop {
 				//System.out.println(p);
 				//System.out.println(s);
 				stock.add(s);
+				//stock.add(p);
 			}
 			
 		}
@@ -54,13 +56,157 @@ public class Shop {
 
 	@Override
 	public String toString() {
-		return "Shop [cash=" + cash + ", stock=" + stock + "]";
-		
+		String ret = "\n-----Shop info----\n" +"Cash:" + cash + "\n\n-----In Stock----\n";
+		for (ProductStock productStock : stock) {
+			//ret+= productStock.getProduct().getName() + productStock.getProduct() + " Quantity: " + productStock.getQuantity() + "\n";
+			ret+= productStock.getProduct().getName() + ", Price: " + productStock.getProduct().getPrice()  + ", Quantity: " + productStock.getQuantity() + "\n";
+		}
+		return ret;
 	}
 
+
+
+	public static void findprice(Shop shop, Customer james){  
+			double amount = 0;
+			double shortamount;
+			int quantity = 0;
+
+			System.out.println("----------------------\n");
+			
+			ArrayList<ProductStock> shopList = james.getShoppingList() ;
+			ArrayList<ProductStock> shopstock = shop.getStock();
+			System.out.println("\n-----Customer Bill-----\n");
+			for (ProductStock sname : shopstock ) {
+			
+				for (ProductStock product : shopList ) {
+				
+					if(product.getProduct().getName().equals(sname.getProduct().getName())){
+						System.out.println(product.getProduct().getName()+ " "+ sname.getProduct().getPrice()+ " * "+ product.getQuantity() );
+			
+						// if the stock
+						if(sname.getQuantity() < product.getQuantity())
+						{
+							//perror("Not in stock");
+						//	printf("Sorry, We have only %d \n \n", sname.getQuantity());
+							System.out.println("Sorry, We have only:" + sname.getQuantity() +"\n");
+						}
+						else{
+							//calculating the cost
+							amount = sname.getProduct().getPrice() * product.getQuantity() + amount;
+							
+							// new quantity
+							quantity = sname.getQuantity() - product.getQuantity();
+							
+							sname.setQuantity(quantity);
+			
+						}
+						
+				
+					}	
+				}
+			}
+			
+
+			if(james.getBudget() < amount)
+			{
+				shortamount = (amount - james.getBudget());
+				System.out.println("----------------------\n");
+				System.out.println("Oh No!!!" );
+				System.out.println("You need more cash, you are short:" + shortamount +"\n");
+				System.out.println("----------------------\n");
+			}
+			else{
+				System.out.println("----------------------");
+				System.out.println("Total Customer Bill:\n" + amount);
+				
+				System.out.println("--------Shop Cash--------");
+				shop.cash = shop.getCash() +amount;
+				System.out.println("Shop cash:" + shop.cash +"\n");
+
+				for (ProductStock sname : shopstock ) {
+					System.out.println(sname.getProduct().getName()+ " " +sname.getQuantity());
+			
+				}
+		
+			}
+
+		}
+
+	public static void livemode(){  
+		
+			Scanner scan = new Scanner(System.in);
+			//Scanner scan = new Scanner(new Customer());
+	
+
+			// find out how much money they have to pay you with
+			System.out.println("How much money do you have?");
+			double budget = scan.nextDouble();
+			System.out.println(budget);
+	
+			// ask the user for what they want to buy and save as string
+			System.out.println("What product do you want to buy?");
+			String pname = scan.nextLine();
+			System.out.println(pname);
+	
+			// Ask how many they want and save as a integer
+			//System.out.println("How many " + productName + " do you want?");
+			//int quantity = scan.nextInt();
+			//System.out.println(quantity);
+	
+			// Print the information
+			//System.out.println("Hi " + name + ", you have " + budget +"and you want to buy " + quantity + " " + productName +  ".");
+			scan.close();	
+		
+		}
+
+
 	public static void main(String[] args) {
+
 		Shop shop = new Shop("src/ShopVideoVersion/stock.csv");
 		System.out.println(shop);
+
+		Customer james = new Customer("src/ShopVideoVersion/customer.csv");
+		System.out.println(james);
+
+		//List shoppingList = new ArrayList[] {"Milk", 1};
+
+		//Customer a = new Customer("test", 20, shoppingList);
+		//System.out.println(a);
+
+		//findPrice(Shop shop);
+		findprice(shop, james);
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("What's your name?");
+		String name = s.next();
+
+		System.out.println("Please enter budget?");
+		double budget = s.nextDouble();
+
+		System.out.println("What product do you want to buy?");
+		String productname = s.next();
+
+		System.out.println("How many ?");
+		int quantity = s.nextInt();
+
+		//System.out.println("Hi " + name + ", you have " + budget +"and you want to buy " + quantity + " " + productname +  ".");
+		
+
+		//livemode();
+		ArrayList<ProductStock> shoppingList2 = new ArrayList<ProductStock>();
+				Product p = new Product(productname, 0);
+				ProductStock sn = new ProductStock(p, quantity);
+				shoppingList2.add(sn);
+
+				System.out.println(sn);
+		
+		s.close();
+				
+		Customer newcustomer = new Customer( name, budget, shoppingList2);
+		System.out.println(newcustomer);
+
+
+		
 	}
 
 }

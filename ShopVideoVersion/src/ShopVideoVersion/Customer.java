@@ -34,14 +34,20 @@ public class Customer {
 			}
 			
 		}
+	
 
-		catch (IOException e) {
 
+
+	catch (IOException e) {
 			// do something
 			e.printStackTrace();
 		}
+	
+	
 	}
 	
+	
+
 	public String getName() {
 		return name;
 	}
@@ -51,38 +57,28 @@ public class Customer {
 		return budget;
 	}
 
-
 	public ArrayList<ProductStock> getShoppingList() {
 		return shoppingList;
 	}
 
-
 	@Override
 	public String toString() {
-		String ret = "Customer [name=" + name + ", budget=" + budget + ", shoppingList=\n";
+		String ret = "\n-----Customer Info----\n" +"Name:" + name + ", Budget:" + budget + "\n\n-----Shopping List----\n\n";
 		for (ProductStock productStock : shoppingList) {
-			ret+= productStock.getProduct().getName() + productStock.getProduct() + " Quantity: " + productStock.getQuantity() + "\n";
+			//ret+= productStock.getProduct().getName() + productStock.getProduct() + " Quantity: " + productStock.getQuantity() + "\n";
+			ret+= productStock.getProduct().getName() + ", Quantity: " + productStock.getQuantity() + "\n";
 		}
-		return ret + "]";
+		return ret;
 	}
 
-/* public String toString2() {
-
-		for (ProductStock s : stock){
-			for (ProductStock productStock : shoppingList) {
-					if (productStock.getProduct().getName().equals(s.getClass())){
-						System.out.println(name);
-
-			}
-		}	
-	}
-} */
+    
 	
 	public static void main(String[] args) {
-		Customer james = new Customer("src/ShopVideoVersion/customer.csv");
-		System.out.println(james);
+		//Customer james = new Customer("src/ShopVideoVersion/customer.csv");
+		//System.out.println(james);
+		
+
 	}
-	
 	
 
 }

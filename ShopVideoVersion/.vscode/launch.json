@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ScannerExample",
+            "request": "launch",
+            "mainClass": "ShopVideoVersion/ShopVideoVersion.ScannerExample",
+            "projectName": "ShopVideoVersion"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Customer",
             "request": "launch",
             "mainClass": "ShopVideoVersion/ShopVideoVersion.Customer",

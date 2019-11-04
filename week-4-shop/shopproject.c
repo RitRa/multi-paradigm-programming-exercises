@@ -108,7 +108,7 @@ struct Customer orderAndshop(){
 	double budget = atoi(b);
 	struct Customer current ={ name, budget };
 	//struct Shop shop = { cashInshop };
-	//printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", current.name, current.budget);
+	printf("CUSTOMER NAME: %s \nBUDGET: %.2f\n", current.name, current.budget);
 	
     while ((read = getline(&line, &len, fp)) != -1)
     {
@@ -172,6 +172,8 @@ double findProductPrice(struct Shop s, struct Customer current)
 					else{
 				     // adding up the bill
 					amount = product.price * current.shoppingList[j].quantity + amount;
+					s.stock[i].quantity = s.stock[i].quantity - current.shoppingList[j].quantity;
+					
 					//i++;		
 					}
 			}		
@@ -195,6 +197,12 @@ double findProductPrice(struct Shop s, struct Customer current)
 			// add to the shop float
 			s.cash = s.cash + amount;
 			printf("Shop cash has been updated: %.2f\n", s.cash);
+			//printf("Shop cash has been updated: %d\n", s.stock);
+			for (int i = 0; i < s.index; i++)
+			{
+				printf("%s, in stock: %d \n",s.stock[i].product.name, s.stock[i].quantity );
+
+			}
 
 		}
 
@@ -239,6 +247,9 @@ struct Customer orderlive()
 }
 int main(void)
 {
+
+
+	
 	struct Shop shop = createAndStockShop();
 	printShop(shop);
 
