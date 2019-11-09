@@ -222,9 +222,13 @@ struct Customer orderlive()
 	double budget;
 	scanf("%lf", &budget);
 	
-	printf("What would you like to buy?\n");
+
+	printf("What would you like to buy?");
 	char *p = malloc(sizeof(char)*50);
-	scanf(" %s", p);
+	char temp;
+	scanf("%c", &temp); 
+	scanf("%[^\n]s", p); 
+	  
 
 	printf("How many?\n");
 	int quantity;
