@@ -36,8 +36,6 @@ public class Customer {
 		}
 	
 
-
-
 	catch (IOException e) {
 			// do something
 			e.printStackTrace();
@@ -47,6 +45,21 @@ public class Customer {
 	}
 	
 	
+
+
+
+
+	public Customer(String name2, double budget2, ArrayList<ProductStock> shoppingList2) {
+		name = name2;
+		budget = budget2;
+		shoppingList =shoppingList2;
+
+	}
+
+	
+
+
+
 
 	public String getName() {
 		return name;

@@ -177,21 +177,20 @@ public class Shop {
 		findprice(shop, james);
 
 		Scanner s = new Scanner(System.in);
-		System.out.println("What's your name?");
-		String name = s.next();
+		System.out.println("-----Live mode------");
+		System.out.println(""+"What's your name?");
+		String name2 = s.nextLine();
 
 		System.out.println("Please enter budget?");
-		double budget = s.nextDouble();
+		double budget2 = Double.valueOf(s.nextLine());
 
 		System.out.println("What product do you want to buy?");
-		String productname = s.next();
+		String productname = s.nextLine();
 
 		System.out.println("How many ?");
-		int quantity = s.nextInt();
+		int quantity = Integer.valueOf(s.nextLine());
 
-		//System.out.println("Hi " + name + ", you have " + budget +"and you want to buy " + quantity + " " + productname +  ".");
 		
-
 		//livemode();
 		ArrayList<ProductStock> shoppingList2 = new ArrayList<ProductStock>();
 				Product p = new Product(productname, 0);
@@ -202,8 +201,9 @@ public class Shop {
 		
 		s.close();
 				
-		Customer newcustomer = new Customer( name, budget, shoppingList2);
+		Customer newcustomer = new Customer( name2, budget2, shoppingList2);
 		System.out.println(newcustomer);
+		findprice(shop, newcustomer);
 
 
 		
