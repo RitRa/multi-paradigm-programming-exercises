@@ -132,32 +132,6 @@ public class Shop {
 
 		}
 
-	public static void livemode(){  
-		
-			Scanner scan = new Scanner(System.in);
-			//Scanner scan = new Scanner(new Customer());
-	
-
-			// find out how much money they have to pay you with
-			System.out.println("How much money do you have?");
-			double budget = scan.nextDouble();
-			System.out.println(budget);
-	
-			// ask the user for what they want to buy and save as string
-			System.out.println("What product do you want to buy?");
-			String pname = scan.nextLine();
-			System.out.println(pname);
-	
-			// Ask how many they want and save as a integer
-			//System.out.println("How many " + productName + " do you want?");
-			//int quantity = scan.nextInt();
-			//System.out.println(quantity);
-	
-			// Print the information
-			//System.out.println("Hi " + name + ", you have " + budget +"and you want to buy " + quantity + " " + productName +  ".");
-			scan.close();	
-		
-		}
 
 
 	public static void main(String[] args) {
@@ -187,11 +161,11 @@ public class Shop {
 		System.out.println("What product do you want to buy?");
 		String productname = s.nextLine();
 
-		System.out.println("How many ?");
+		System.out.println("How many?");
 		int quantity = Integer.valueOf(s.nextLine());
 
 		
-		//livemode();
+		
 		ArrayList<ProductStock> shoppingList2 = new ArrayList<ProductStock>();
 				Product p = new Product(productname, 0);
 				ProductStock sn = new ProductStock(p, quantity);
